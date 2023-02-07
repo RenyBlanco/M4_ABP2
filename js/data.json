@@ -1,5 +1,6 @@
 {
-    "Campeonato": {
+    "campeonato": {
+        "nombre": "13a Campeonato Los Colihues",
         "equipos": [
             {
                 "nombre": "Pantera",
@@ -10,19 +11,19 @@
                         "nombre": "Roberto",
                         "apellido": "Gonzalez",
                         "rut": "11.111.111-1",
-                        "fecha":"01/01/1980"
+                        "nacio":"01/01/1980"
                     },
                     {
                         "nombre": "Antonio",
                         "apellido": "Gonzalez",
                         "rut": "21.111.111-1",
-                        "fecha":"01/02/1980"
+                        "nacio":"01/02/1980"
                     },
                     {
                         "nombre": "Ignacio",
                         "apellido": "Gonzalez",
                         "rut": "21.112.111-1",
-                        "fecha":"05/02/1980"
+                        "nacio":"05/02/1980"
                     }
                 ]
             },
@@ -35,19 +36,19 @@
                         "nombre": "Rey",
                         "apellido": "Blanco",
                         "rut": "11.111.111-2",
-                        "fecha":"01/01/1985"
+                        "nacio":"01/01/1985"
                     },
                     {
                         "nombre": "Ender",
                         "apellido": "Martinez",
                         "rut": "21.112.111-1",
-                        "fecha":"01/02/1985"
+                        "nacio":"01/02/1985"
                     },
                     {
                         "nombre": "Carlos",
                         "apellido": "Matador",
                         "rut": "21.112.121-1",
-                        "fecha":"05/02/1988"
+                        "nacio":"05/02/1988"
                     }
                 ]
             },
@@ -60,19 +61,19 @@
                         "nombre": "Gabriel",
                         "apellido": "Herrera",
                         "rut": "11.121.111-2",
-                        "fecha":"01/01/1990"
+                        "nacio":"01/01/1990"
                     },
                     {
                         "nombre": "Jerit",
                         "apellido": "Bermudez",
                         "rut": "21.112.121-1",
-                        "fecha":"01/02/1985"
+                        "nacio":"01/02/1985"
                     },
                     {
                         "nombre": "Marcelo",
                         "apellido": "Cancelo",
                         "rut": "21.132.121-1",
-                        "fecha":"04/03/1988"
+                        "nacio":"04/03/1988"
                     }
                 ]
             }
