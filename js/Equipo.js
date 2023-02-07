@@ -5,7 +5,7 @@ function Equipo(_nombre, _capitan, _poblacion){
     this.jugadores = [];
 }
 
-Equipo.prototype.getjugadores= function(){
+Equipo.prototype.getjugadores = function(){
     return jugadores;
 }
 

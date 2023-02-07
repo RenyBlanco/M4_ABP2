@@ -1,5 +1,6 @@
 // Vars
-let tbody = document.getElementById("cuerpo");
+let bodyEquipo = document.getElementById("cuerpoT");
+let bodyJugadores = document.getElementById("cuerpoJ");
 let campeonato;
 
 //Lee el Json
@@ -17,33 +18,56 @@ const data = fetch('./js/data.json')
             campeonato.agregaEquipo(equipo)
         });
 
-        campeonato.equipos.forEach(equipo => {
-            mostrarJugadores(equipo.jugadores, equipo.nombre)
-        })
+        campeonato.equipos.forEach((equipo, idx) => {
+            mostrarEquipos(equipo.nombre, equipo.poblacion, equipo.capitan, equipo.jugadores, idx);
+        });
 
     });
 
-function mostrarJugadores(jugadores, team) {
-    jugadores.forEach(jugador => {
+function mostrarEquipos(team, poblacion, capitan, jugadores, k) {
+
+    const tr = document.createElement('tr');
+
+    const tdEquipo = document.createElement('td');
+    const tdPoblacion = document.createElement('td');
+    const tdCapitan = document.createElement('td');
+    const tdAccion = document.createElement('td');
+
+    tdEquipo.textContent = team;
+    tdPoblacion.textContent = poblacion;
+    tdCapitan.textContent = capitan;
+    tdAccion.innerHTML = `<a href="javascript:void(0)" onclick="edita(${k})">Editar</a>&nbsp;
+    <a href="javascript:void(0)" onclick="mostrarJugadores(${k})">Ver Jugadores</a>`
+    tr.appendChild(tdEquipo);
+    tr.appendChild(tdPoblacion);
+    tr.appendChild(tdCapitan);
+    tr.appendChild(tdAccion);
+    bodyEquipo.appendChild(tr);
+}
+
+function mostrarJugadores(k) {
+    bodyJugadores.innerHTML = "";
+
+    console.log(campeonato.equipos[k].jugadores);
+    
+    campeonato.equipos[k].jugadores.forEach(jugador => {
         const tr = document.createElement('tr');
 
-        const tdEquipo = document.createElement('td');
         const tdNombre = document.createElement('td');
         const tdApellido = document.createElement('td');
         const tdRut = document.createElement('td');
         const tdNacio = document.createElement('td');
 
-        tdEquipo.textContent = team;
         tdNombre.textContent = jugador.nombre
         tdApellido.textContent = jugador.apellido
         tdRut.textContent = jugador.rut
         tdNacio.textContent = jugador.nacio
 
-        tr.appendChild(tdEquipo);
         tr.appendChild(tdNombre);
         tr.appendChild(tdApellido);
         tr.appendChild(tdRut);
         tr.appendChild(tdNacio);
-        tbody.appendChild(tr);
+        bodyJugadores.appendChild(tr);
     });
 }
+
