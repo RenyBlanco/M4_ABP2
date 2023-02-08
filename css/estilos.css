@@ -20,9 +20,9 @@ body {
     margin-right: 100px;
 }
 .opciones div{
-margin: 10px;
-flex-basis: auto;
-color: aqua;
+    margin: 10px;
+    flex-basis: auto;
+    color: aqua;
 }
 
 footer {
@@ -40,4 +40,20 @@ footer {
 
 footer p {
     color: aliceblue;
+}
+
+.mostrarT{
+    display: none;
+}
+
+.mostrarP{
+    display: none;
+}
+
+.tablaT {
+    display: none;
+}
+
+.tablaP {
+    display: none;
 }

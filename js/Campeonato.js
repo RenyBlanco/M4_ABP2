@@ -1,16 +1,30 @@
-function Campeonato(nombre){
-    this.nombre = nombre;
+function Campeonato(_nombre, _maxT, _maxP, _minE){
+    this.nombre = _nombre;
+    this.maxEquipos = _maxT;
+    this.maxPlayer = _maxP;
+    this.minEdad = _minE;
     this.equipos = [];
-}
+} 
 
 Campeonato.prototype.getEquipos= function (){
-    return equipos;
+    return this.equipos;
 }
 
+Campeonato.prototype.getMaxPlayers= function (){
+    return this.maxPlayer;
+}
+Campeonato.prototype.getMaxEquipos = function (){
+    return this.maxEquipos;
+}
 Campeonato.prototype.buscaEquipo = function(team){
     this.equipos.filter(nombre => team == nombre);
 }
 
 Campeonato.prototype.agregaEquipo = function(team){
-    this.equipos.push(team);
+    if(this.equipos.length < this.maxEquipos){
+        this.equipos.push(team);
+        return true
+    } else    {
+        return false
+    }       
 }
