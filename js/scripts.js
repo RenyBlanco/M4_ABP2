@@ -142,7 +142,7 @@ function mostrarEquipos(team, poblacion, k) {
 
 function agregaJugadores(indice) {
     k = indice;
-    document.getElementById('h3Play').innerHTML = cabeza+' de '+campeonato.equipos[k].nombre;
+    document.getElementById('cabeza').innerHTML = cabeza+' de '+campeonato.equipos[k].nombre;
     secPlay.classList.remove('mostrarP');
        
     if(document.getElementById('cabeza').innerHTML == cabeza){
