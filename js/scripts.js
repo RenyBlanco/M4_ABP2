@@ -6,6 +6,8 @@ const secTeam = document.getElementById('shTeam');
 const secPlay = document.getElementById('shPlay');
 const secTeamTable = document.getElementById('shTablaT');
 const secPlayTable = document.getElementById('shTablaP');
+const cabeza = document.getElementById('cabeza').innerHTML;
+
 let bodyEquipo = document.getElementById("cuerpoT");
 let bodyJugadores = document.getElementById("cuerpoJ");
 let campeonato;
@@ -100,25 +102,25 @@ function limpiaJugadores(){
     document.getElementById('capitan').checked = false;
 }
 //Lee el Json
-const data = fetch('./js/data.json')
-    .then(res => res.json()) 
-    .then(data => {
-        campeonato = new Campeonato(data.campeonato.nombre);
+// const data = fetch('./js/data.json')
+//     .then(res => res.json()) 
+//     .then(data => {
+//         campeonato = new Campeonato(data.campeonato.nombre);
 
-        data.campeonato.equipos.forEach(element => {
-            const equipo = new Equipo(element.nombre, element.capitan, element.poblacion);
-            element.jugadores.forEach(sujeto => {
-                const jugador = new Jugador(sujeto.nombre, sujeto.apellido, sujeto.rut, sujeto.nacio);
-                equipo.agregaJugador(jugador);
-            })
-            campeonato.agregaEquipo(equipo)
-            bodyEquipo.innerHTML = "";
-        });
-        campeonato.equipos.forEach((equipo, idx) => {
-            mostrarEquipos(equipo.nombre, equipo.poblacion, idx);
-        });
+//         data.campeonato.equipos.forEach(element => {
+//             const equipo = new Equipo(element.nombre, element.capitan, element.poblacion);
+//             element.jugadores.forEach(sujeto => {
+//                 const jugador = new Jugador(sujeto.nombre, sujeto.apellido, sujeto.rut, sujeto.nacio);
+//                 equipo.agregaJugador(jugador);
+//             })
+//             campeonato.agregaEquipo(equipo)
+//             bodyEquipo.innerHTML = "";
+//         });
+//         campeonato.equipos.forEach((equipo, idx) => {
+//             mostrarEquipos(equipo.nombre, equipo.poblacion, idx);
+//         });
 
-    });
+//     });
 
 
 function mostrarEquipos(team, poblacion, k) {
@@ -141,10 +143,22 @@ function mostrarEquipos(team, poblacion, k) {
 function agregaJugadores(indice) {
     k = indice;
     secPlay.classList.remove('mostrarP');
+       
+    if(document.getElementById('cabeza').innerHTML == cabeza){
+        document.getElementById('cabeza').innerHTML = cabeza+' de '+campeonato.equipos[k].nombre;
+    }
+    if(document.getElementById('cabeza').innerHTML !== cabeza+' de '+campeonato.equipos[k].nombre){
+        document.getElementById('cabeza').innerHTML = cabeza+' de '+campeonato.equipos[k].nombre;
+        bodyJugadores.innerHTML = '';
+    }else{
+        document.getElementById('cabeza').innerHTML = cabeza+' de '+campeonato.equipos[k].nombre;
+    }
 }
 
 function mostrarJugadores(k) {
     bodyJugadores.innerHTML = '';
+    document.getElementById('cabeza').innerHTML = cabeza+' de '+campeonato.equipos[k].nombre;
+
     campeonato.equipos[k].jugadores.forEach(jugador => {
         const tr = document.createElement('tr');
         const tdNombre = document.createElement('td');
