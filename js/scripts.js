@@ -78,6 +78,7 @@ btnPlay.addEventListener('click',(event)=>{
                 limpiaJugadores();
             }else{
                 alert('Juagdor debe tener una edad mínima de ' + campeonato.getMinEdad() + ' años');
+                limpiaJugadores();
             }
         }else{
            alert('Maximo jugadores superado');
