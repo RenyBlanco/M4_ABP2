@@ -13,7 +13,6 @@ Jugador.getNombre = ()=> {
 Jugador.getApellido = () => { 
     return this.apellido
 }
-
 Jugador.esMayor = (minima) => {
     let annioHoy = new Date();
     if((annioHoy.getFullYear()-this.nacio) > minima) {

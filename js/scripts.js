@@ -10,6 +10,7 @@ let bodyEquipo = document.getElementById("cuerpoT");
 let bodyJugadores = document.getElementById("cuerpoJ");
 let campeonato;
 let teams;
+let k;
 let players;
 
 
@@ -31,15 +32,19 @@ btnTorneo.addEventListener('click',(event)=>{
 btnTeam.addEventListener('click',(event)=>{
     if(document.getElementById('team').value != '' && document.getElementById('poblacion').value != ''){
         if(campeonato.equipos.length < campeonato.getMaxEquipos()){
-            
-            campeonato.agregaEquipo(new Equipo(document.getElementById('team').value, 
-            document.getElementById('poblacion').value));
+            var valor = campeonato.buscaEquipo(document.getElementById('team').value);
+            if(valor.length === 0){
+                campeonato.agregaEquipo(new Equipo(document.getElementById('team').value, 
+                document.getElementById('poblacion').value));
+                limpiaEquipo();
+            }else{
+                alert('El equipo ya existe');
+                limpiaEquipo();
+            }
         }else{
            alert('Maximo equipos superado');
+           limpiaEquipo();
         }
-        const teams = campeonato.equipos;
-        console.log('Torneo ', campeonato);
-        console.log('Teams ', teams);
         secTeamTable.classList.remove('tablaT');
         bodyEquipo.innerHTML = '';
         campeonato.equipos.forEach((equipo, idx) => {
@@ -50,32 +55,50 @@ btnTeam.addEventListener('click',(event)=>{
     }
 });
 
+function limpiaEquipo(){
+    document.getElementById('team').value = '';
+    document.getElementById('poblacion').value = '';
+}
+
 btnPlay.addEventListener('click',(event)=>{
     if(document.getElementById('nombre').value != '' && document.getElementById('apellido').value != '' && document.getElementById('rut').value != ''
     && !isNaN(document.getElementById('annio').valueAsNumber)){
-        if(campeonato.equipos.jugadores.length < campeonato.getMaxPlayers()){
-            if(!campeonato.equipos.buscaJugador(document.getElementById('rut').value)){
-                const players = new Jugador(document.getElementById('nombre').value, document.getElementById('apellido').value, document.getElementById('rut').value, document.getElementById('annio').valueAsNumber)
-                campeonato.equipos.agregaJugador(players);
-            }else{
-                alert('Juagdor Repetido');
+        if(campeonato.equipos[k].jugadores.length < campeonato.getMaxPlayers()){
+            for (let index = 0; index <campeonato.equipos.length; index++) {
+                if(campeonato.equipos[index].buscaJugador(document.getElementById('rut').value)){
+                    alert("El jugador ya existe");
+                    limpiaJugadores();
+                    return false;
+                }
             }
-
-            // campeonato.agregaEquipo(new Equipo(document.getElementById('team').value, 
-            //     document.getElementById('poblacion').value));
+            let annioHoy = new Date();
+            if((annioHoy.getFullYear()-document.getElementById('annio').valueAsNumber) > campeonato.getMinEdad()){
+                const players = new Jugador(document.getElementById('nombre').value, document.getElementById('apellido').value, document.getElementById('rut').value, document.getElementById('annio').valueAsNumber, document.getElementById('capitan').checked)
+                campeonato.equipos[k].agregaJugador(players, campeonato.getMaxPlayers);
+                limpiaJugadores();
+            }else{
+                alert('Juagdor debe tener una edad mínima de ' + campeonato.getMinEdad() + ' años');
+                limpiaJugadores();
+            }
         }else{
            alert('Maximo jugadores superado');
+           limpiaJugadores();
         }
-        console.log(campeonato);
         secPlayTable.classList.remove('tablaP');
         bodyJugadores.innerHTML = '';
-        equipo.jugadores.forEach((jugadores, idx) => {
-            mostrarJugadores(idx);
-        });
+        mostrarJugadores(k);
     }else{
         alert('Todos los campos deben tener un valor');
     }
 });
+
+function limpiaJugadores(){
+    document.getElementById('nombre').value = '';
+    document.getElementById('apellido').value = '';
+    document.getElementById('rut').value = '';
+    document.getElementById('annio').valueAsNumber = 0  ;
+    document.getElementById('capitan').checked = false;
+}
 //Lee el Json
 const data = fetch('./js/data.json')
     .then(res => res.json()) 
@@ -101,7 +124,6 @@ const data = fetch('./js/data.json')
 function mostrarEquipos(team, poblacion, k) {
     
     const tr = document.createElement('tr');
-
     const tdEquipo = document.createElement('td');
     const tdPoblacion = document.createElement('td');
     const tdAccion = document.createElement('td');
@@ -116,32 +138,32 @@ function mostrarEquipos(team, poblacion, k) {
     bodyEquipo.appendChild(tr);
 }
 
-function agregaJugadores(k) {
+function agregaJugadores(indice) {
+    k = indice;
     secPlay.classList.remove('mostrarP');
 }
 
 function mostrarJugadores(k) {
-    bodyJugadores.innerHTML = "";
-
-    console.log(campeonato.equipos[k].jugadores);
-    
+    bodyJugadores.innerHTML = '';
     campeonato.equipos[k].jugadores.forEach(jugador => {
         const tr = document.createElement('tr');
-
         const tdNombre = document.createElement('td');
         const tdApellido = document.createElement('td');
         const tdRut = document.createElement('td');
         const tdNacio = document.createElement('td');
+        const tdCapi = document.createElement('td');
 
         tdNombre.textContent = jugador.nombre
         tdApellido.textContent = jugador.apellido
         tdRut.textContent = jugador.rut
         tdNacio.textContent = jugador.nacio
+        jugador.capitan ? tdCapi.textContent = 'Si' : tdCapi.textContent = 'No';
 
         tr.appendChild(tdNombre);
         tr.appendChild(tdApellido);
         tr.appendChild(tdRut);
         tr.appendChild(tdNacio);
+        tr.appendChild(tdCapi);
         bodyJugadores.appendChild(tr);
     });
 }
