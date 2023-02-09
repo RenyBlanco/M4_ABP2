@@ -8,6 +8,7 @@ const secTeamTable = document.getElementById('shTablaT');
 const secPlayTable = document.getElementById('shTablaP');
 let bodyEquipo = document.getElementById("cuerpoT");
 let bodyJugadores = document.getElementById("cuerpoJ");
+let cabeza = document.getElementById('h3Play').innerHTML;
 let campeonato;
 let teams;
 let k;
@@ -140,11 +141,13 @@ function mostrarEquipos(team, poblacion, k) {
 
 function agregaJugadores(indice) {
     k = indice;
+    document.getElementById('h3Play').innerHTML = cabeza+' de '+campeonato.equipos[k].nombre;
     secPlay.classList.remove('mostrarP');
 }
 
 function mostrarJugadores(k) {
     bodyJugadores.innerHTML = '';
+    document.getElementById('h3Play').innerHTML = cabeza+' de '+campeonato.equipos[k].nombre;
     campeonato.equipos[k].jugadores.forEach(jugador => {
         const tr = document.createElement('tr');
         const tdNombre = document.createElement('td');
