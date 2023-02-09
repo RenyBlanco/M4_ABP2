@@ -10,7 +10,6 @@ const cabeza = document.getElementById('cabeza').innerHTML;
 
 let bodyEquipo = document.getElementById("cuerpoT");
 let bodyJugadores = document.getElementById("cuerpoJ");
-let cabeza = document.getElementById('h3Play').innerHTML;
 let campeonato;
 let teams;
 let k;
