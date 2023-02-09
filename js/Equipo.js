@@ -5,25 +5,21 @@ function Equipo(_nombre, _poblacion){
 }
 
 Equipo.prototype.getJugadores = function(){
-    return 'jugadores';
+    return this.jugadores;
 }
 
 Equipo.prototype.buscaJugador = function(player){
     if(player.length!=0){
         let encontro =  this.jugadores.filter(e => e.rut === player);
-        if (encontro) {
-            return true;
-        }else{
+        if (!encontro.length) {
             return false;
+        }else{
+            return true;
         }
     }  
 }
 
 Equipo.prototype.agregaJugador = function(player){
-    if(this.jugadores.length < Campeonato.getMaxPlayers){
-        this.jugadores.push(player);
-        return true;
-    }else{
-        return false;
-    }
+    this.jugadores.push(player);
+    return true;
 }

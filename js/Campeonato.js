@@ -16,8 +16,11 @@ Campeonato.prototype.getMaxPlayers= function (){
 Campeonato.prototype.getMaxEquipos = function (){
     return this.maxEquipos;
 }
+Campeonato.prototype.getMinEdad = function (){
+    return this.minEdad;
+}
 Campeonato.prototype.buscaEquipo = function(team){
-    this.equipos.filter(nombre => team == nombre);
+    return this.equipos.filter(e => e.nombre === team);
 }
 
 Campeonato.prototype.agregaEquipo = function(team){
