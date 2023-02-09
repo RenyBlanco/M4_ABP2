@@ -39,7 +39,7 @@ btnTeam.addEventListener('click',(event)=>{
         }
         const teams = campeonato.equipos;
         console.log('Torneo ', campeonato);
-        console.log('Teams ', teams.Equipo);
+        console.log('Teams ', teams);
         secTeamTable.classList.remove('tablaT');
         bodyEquipo.innerHTML = '';
         campeonato.equipos.forEach((equipo, idx) => {
